@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Attendance</title>
     <link rel="stylesheet" href="/static/dark-theme.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>View Attendance</h1>
@@ -13,7 +14,15 @@
     <div>
         <label for="date-picker">Select a Date:</label>
         <input type="date" id="date-picker">
-        <button id="filter-btn">Filter</button>
+        <button id="filter-date-btn">Filter by Date</button>
+    </div>
+
+    <!-- Student Search for Filtering -->
+    <div>
+        <label for="student-search">Search by Student:</label>
+        <input type="text" id="student-search" placeholder="Start typing a student's name">
+        <ul id="student-dropdown" style="display: none;"></ul>
+        <button id="filter-student-btn">Filter by Student</button>
     </div>
 
     <!-- Attendance Display -->
@@ -23,7 +32,7 @@
 
     <div id="loading" style="display: none;">Loading...</div>
     <div id="error" style="display: none;"></div>
-    
-    <script src="{{ url_for('static', filename='view.js') }}"></script>
+
+    <script src="/static/view.js"></script>
 </body>
 </html>
