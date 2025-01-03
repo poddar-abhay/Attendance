@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Attendance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -13,29 +13,31 @@
     <button id="submit-btn">Submit Attendance</button>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Fetch students from the server
-            $.get('/get-students', function(students) {
+            $.get('/get-students', function (students) {
                 const studentList = $('#student-list');
                 students.forEach(student => {
                     studentList.append(`
-                        <div>
-                            <label>
-                                <input type="checkbox" class="attendance-checkbox" data-name="${student}">
-                                ${student}
-                            </label>
+                        <div class="student-button" data-name="${student}">
+                            ${student}
                         </div>
                     `);
+                });
+
+                // Add click event to toggle selection
+                $('.student-button').click(function () {
+                    $(this).toggleClass('selected');
                 });
             });
 
             // Submit attendance
-            $('#submit-btn').click(function() {
+            $('#submit-btn').click(function () {
                 const attendance = [];
-                $('.attendance-checkbox').each(function() {
+                $('.student-button').each(function () {
                     attendance.push({
                         name: $(this).data('name'),
-                        status: $(this).is(':checked') ? 'Present' : 'Absent'
+                        status: $(this).hasClass('selected') ? 'Present' : 'Absent'
                     });
                 });
 
@@ -44,10 +46,10 @@
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ attendance }),
-                    success: function(response) {
+                    success: function (response) {
                         alert('Attendance submitted successfully!');
                     },
-                    error: function() {
+                    error: function () {
                         alert('Failed to submit attendance.');
                     }
                 });
