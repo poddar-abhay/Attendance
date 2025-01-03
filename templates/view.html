@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Attendance</title>
+    <link rel="stylesheet" href="/static/dark-theme.css">
+</head>
+<body>
+    <h1>View Attendance</h1>
+
+    <!-- Date Picker for Filtering -->
+    <div>
+        <label for="date-picker">Select a Date:</label>
+        <input type="date" id="date-picker">
+        <button id="filter-btn">Filter</button>
+    </div>
+
+    <!-- Attendance Display -->
+    <div id="attendance-container-wrapper">
+        <div id="attendance-container"></div>
+    </div>
+
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="error" style="display: none;"></div>
+    
+    <script src="{{ url_for('static', filename='view.js') }}"></script>
+</body>
+</html>
